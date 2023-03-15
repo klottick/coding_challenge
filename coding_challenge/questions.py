@@ -1,6 +1,11 @@
 """
 Coding Challenge
 """
+__all__ = []
+
+for i in range(1, 6):
+    __all__.append(f"question_{i}")
+
 
 def question_1(input: str) -> str:
     """
@@ -13,6 +18,8 @@ def question_1(input: str) -> str:
     Returns:
         str -- The in place reserved string
     """
+    return ""
+
 
 def question_2(hash1: dict, hash2: dict) -> dict:
     """
@@ -31,6 +38,8 @@ def question_2(hash1: dict, hash2: dict) -> dict:
     Returns:
         dict -- The updated hash
     """
+    return {}
+
 
 def question_3(input: list) -> list:
     """
@@ -43,6 +52,8 @@ def question_3(input: list) -> list:
     Returns:
         list -- The duplicate values found
     """
+    return []
+
 
 def question_4(cipher: list, message: list) -> str:
     """
@@ -56,6 +67,8 @@ def question_4(cipher: list, message: list) -> str:
     Returns:
         str -- The deciphered message
     """
+    return ""
+
 
 def question_5(input: str) -> list:
     """
@@ -68,3 +81,4 @@ def question_5(input: str) -> list:
     Returns:
         list -- A list of permutations
     """
+    return []

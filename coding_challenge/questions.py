@@ -1,6 +1,9 @@
 """
 Coding Challenge
 """
+
+import copy
+
 __all__ = []
 
 for i in range(1, 6):
@@ -18,12 +21,22 @@ def question_1(input: str) -> str:
     Returns:
         str -- The in place reserved string
     """
-    return ""
+    punctuation = ["?", ",", ".", ":", ";", "!"]
+
+    words = input.split(" ")
+    for i in range(len(words)):
+        if words[i][-1] in punctuation:
+            words[i] = words[i][-1] + words[i][:-1]
+    reversed_words = [x[::-1] for x in words]
+    reversed_sentence = " ".join(reversed_words)
+    return reversed_sentence
 
 
 def question_2(hash1: dict, hash2: dict) -> dict:
     """
-    Write a function that takes two hashes, merges them together, and returns the result. The hashes might contain integers, strings, arrays of integers, and other hashes (each of which might contain the same types of objects). When a duplicate key is found:
+    Write a function that takes two hashes, merges them together, and returns the result. The hashes might contain integers,
+    strings, arrays of integers, and other hashes (each of which might contain the same types of objects).
+    When a duplicate key is found:
 
     * If the value is a string or integer, the value from the second hash should replace the value from the first
     * If the value is another hash, merge the two hashes together using these same rules.
@@ -38,7 +51,22 @@ def question_2(hash1: dict, hash2: dict) -> dict:
     Returns:
         dict -- The updated hash
     """
-    return {}
+    ans = {}
+    for key, u_val in hash2.items():
+        if key not in hash1:
+            ans[key] = u_val
+        else:
+            if type(u_val) == list:
+                ans[key] = hash1[key] + u_val
+            elif type(u_val) == dict:
+                ans[key] = question_2(hash1[key], u_val)
+            else:
+                ans[key] = u_val
+
+    for key, i_val in hash1.items():
+        if key not in ans:
+            ans[key] = i_val
+    return ans
 
 
 def question_3(input: list) -> list:
@@ -52,7 +80,15 @@ def question_3(input: list) -> list:
     Returns:
         list -- The duplicate values found
     """
-    return []
+
+    found_words = set()
+    ans = set()
+    for word in input:
+        if word in found_words:
+            ans.add(word)
+        else:
+            found_words.add(word)
+    return list(ans)
 
 
 def question_4(cipher: list, message: list) -> str:
@@ -67,7 +103,27 @@ def question_4(cipher: list, message: list) -> str:
     Returns:
         str -- The deciphered message
     """
-    return ""
+
+    # looked up sorted syntax here https://docs.python.org/3/library/functions.html#sorted
+
+    combined = zip(cipher, message)
+    combined = sorted(combined, key=lambda x: x[0])
+    sorted_message = " ".join([x[1] for x in combined])
+
+    return sorted_message
+
+
+def get_permutations(input, current, ans):
+    if len(input) == 0:
+        ans.append(current)
+
+    for i in range(len(input)):
+        holdout = input[i]
+        left = input[:i]
+        right = input[i + 1 :]
+        lr = left + right
+        get_permutations(lr, holdout + current, ans)
+    return ans
 
 
 def question_5(input: str) -> list:
@@ -81,4 +137,8 @@ def question_5(input: str) -> list:
     Returns:
         list -- A list of permutations
     """
-    return []
+    return get_permutations(input, "", [])
+
+
+if __name__ == "__main__":
+    print(question_5("a"))

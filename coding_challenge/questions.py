@@ -26,7 +26,9 @@ def question_1(input: str) -> str:
     words = input.split(" ")
     for i in range(len(words)):
         if words[i][-1] in punctuation:
-            words[i] = words[i][-1] + words[i][:-1]
+            words[i] = (
+                words[i][-1] + words[i][:-1]
+            )  # Flip location of ending punctuation so it stays there
     reversed_words = [x[::-1] for x in words]
     reversed_sentence = " ".join(reversed_words)
     return reversed_sentence
@@ -51,7 +53,7 @@ def question_2(hash1: dict, hash2: dict) -> dict:
     Returns:
         dict -- The updated hash
     """
-    ans = {}
+    ans = {}  # Create new dictionary to store answer to avoid modifying the inputs
     for key, u_val in hash2.items():
         if key not in hash1:
             ans[key] = u_val
@@ -113,7 +115,18 @@ def question_4(cipher: list, message: list) -> str:
     return sorted_message
 
 
-def get_permutations(input, current, ans):
+def get_permutations(input: str, current: str, ans: list) -> list:
+    """Generates all permutations from input and concats value in current to the end.
+    These are then placed in ans.
+
+    Args:
+        input (str): String to create permutations from
+        current (str): value to concatonate to the end of each permutation of input
+        ans (list): Contains all previously created permutation combinations
+
+    Returns:
+        list: Combination of previously created Permutation combinations and newly created combos
+    """
     if len(input) == 0:
         ans.append(current)
 

@@ -1,0 +1,26 @@
+body {
+    background-color: #91D8E4
+}
+
+.card {
+    background-color: #BFEAF5;
+    margin: 1% 1% 1% 1%;
+    overflow: auto
+}
+
+.hljs {
+    background: #EAFDFC;
+    /* #FFFFFF; */
+    color: #434f54;
+}
+
+.sidebar-container {
+    height: 100vh;
+    background-color: #BFEAF5;
+    padding: 2rem 2rem;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+
+}
